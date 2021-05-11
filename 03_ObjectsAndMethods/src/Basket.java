@@ -4,11 +4,12 @@ public class Basket {
     private String items = "";
     private int totalPrice = 0;
     private int limit;
+    private double totalWeight = 0;
 
     public Basket() {
         increaseCount(1);
         items = "Список товаров:";
-        this.limit = 1000000;
+        this.limit = 1000000000;
     }
 
     public Basket(int limit) {
@@ -50,8 +51,23 @@ public class Basket {
         }
 
         items = items + "\n" + name + " - " +
-            count + " шт. - " + price;
+                count + " шт., цена - " + price;
         totalPrice = totalPrice + count * price;
+
+    }
+
+    public void add(String name, int price, double weight) {
+        add(name, price, 1);
+        this.totalWeight = totalWeight + weight;
+    }
+
+    public void add(String name, int price, int count, double weight) {
+        add(name, price, 1);
+        this.totalWeight = totalWeight + weight;
+    }
+
+    public double weight() {
+        return totalWeight;
     }
 
     public void clear() {
@@ -72,7 +88,7 @@ public class Basket {
         if (items.isEmpty()) {
             System.out.println("Корзина пуста");
         } else {
-            System.out.println(items);
+            System.out.println(items + "\n" + "Общий вес: " + totalWeight);
         }
     }
 }
