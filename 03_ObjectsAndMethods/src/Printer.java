@@ -42,7 +42,7 @@ public class Printer {
     }
 
     public void clear() {
-        System.out.println("Очередь печати очищена");
+        System.out.println("Очередь печати очищена" + "\n");
     }
 
     public static void main(String[] args) {
