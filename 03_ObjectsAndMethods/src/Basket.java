@@ -5,6 +5,24 @@ public class Basket {
     private int totalPrice = 0;
     private int limit;
     private double totalWeight = 0;
+    private static int allPriceCount = 0;
+    private static int allItemsCount = 0;
+
+    public static int getAllPriceCount() {
+        return allPriceCount;
+    }
+
+    public static int getAllItemsCount() {
+        return allItemsCount;
+    }
+
+    public static double averageItemPrice() {
+        return getAllPriceCount() / getAllItemsCount();
+    }
+
+    public static double averageBasketPrice() {
+        return getAllPriceCount() / getCount();
+    }
 
     public Basket() {
         increaseCount(1);
@@ -33,6 +51,8 @@ public class Basket {
 
     public void add(String name, int price) {
         add(name, price, 1);
+        allPriceCount = allPriceCount + price;
+        allItemsCount = allItemsCount + count;
     }
 
     public void add(String name, int price, int count) {
@@ -59,11 +79,15 @@ public class Basket {
     public void add(String name, int price, double weight) {
         add(name, price, 1);
         this.totalWeight = totalWeight + weight;
+        allPriceCount = allPriceCount + price;
+        allItemsCount = allItemsCount + count;
     }
 
     public void add(String name, int price, int count, double weight) {
         add(name, price, 1);
         this.totalWeight = totalWeight + weight;
+        allPriceCount = allPriceCount + price * count;
+        allItemsCount = allItemsCount + count;
     }
 
     public double weight() {
@@ -89,6 +113,7 @@ public class Basket {
             System.out.println("Корзина пуста");
         } else {
             System.out.println(items + "\n" + "Общий вес: " + totalWeight);
+
         }
     }
 }
