@@ -1,39 +1,77 @@
 package ru.skillbox;
 
+import ru.skillbox.Dimensions;
+
 public class FedExList {
-    private final double weight;
-    private final String deliveryAddress;
-    private final boolean isItPossibleToFlip;
-    private final String regNumber;
-    private final boolean isTheCargoFragile;
+  private final Dimensions dimensions;
+  private double weight;
+  private String deliveryAddress;
+  private boolean isItPossibleToFlip;
+  private String regNumber;
+  private boolean isTheCargoFragile;
 
-    public FedExList(double weight, String deliveryAddress, boolean isItPossibleToFlip, String regNumber, boolean isTheCargoFragile) {
-        this.weight = weight;
-        this.deliveryAddress = deliveryAddress;
-        this.isItPossibleToFlip = isItPossibleToFlip;
-        this.regNumber = regNumber;
-        this.isTheCargoFragile = isTheCargoFragile;
-    }
+  public FedExList(
+      Dimensions dimensions,
+      double weight,
+      String deliveryAddress,
+      boolean isItPossibleToFlip,
+      String regNumber,
+      boolean isTheCargoFragile) {
+    this.dimensions = dimensions;
+    this.weight = weight;
+    this.deliveryAddress = deliveryAddress;
+    this.isItPossibleToFlip = isItPossibleToFlip;
+    this.regNumber = regNumber;
+    this.isTheCargoFragile = isTheCargoFragile;
+  }
 
-    public double getWeight() {
-        return weight;
-    }
+  public Dimensions getDimensions() {
+    return dimensions;
+  }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
+  public double getWeight() {
+    return weight;
+  }
 
-    public boolean isItPossibleToFlip() {
-        return isItPossibleToFlip;
-    }
+  public void setWeight(double weight) {
+    this.weight = weight;
+  }
 
-    public String getRegNumber() {
-        return regNumber;
-    }
+  public String getDeliveryAddress() {
+    return deliveryAddress;
+  }
 
-    public boolean isTheCargoFragile() {
-        return isTheCargoFragile;
-    }
+  public void setDeliveryAddress(String deliveryAddress) {
+    this.deliveryAddress = deliveryAddress;
+  }
 
+  public boolean getisItPossibleToFlip() {
+    return isItPossibleToFlip;
+  }
 
+  public String getRegNumber() {
+    return regNumber;
+  }
+
+  public boolean getIsTheCargoFragile() {
+    return isTheCargoFragile;
+  }
+
+  public String toString() {
+    return "вес - "
+        + weight
+        + ", "
+        + "адрес - "
+        + deliveryAddress
+        + ", "
+        + "можно ли переворачивать - "
+        + isItPossibleToFlip
+        + ", "
+        + "номер - "
+        + regNumber
+        + ", "
+        + "хрупкий товар - "
+        + isTheCargoFragile
+        + ".";
+  }
 }
