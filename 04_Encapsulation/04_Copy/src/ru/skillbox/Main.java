@@ -1,4 +1,4 @@
-ppackage ru.skillbox;
+package ru.skillbox;
 
 import ru.skillbox.FedExList;
 
