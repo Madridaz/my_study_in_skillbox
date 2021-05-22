@@ -19,16 +19,12 @@ public class Main {
   В противном случае тестовый метод не сможет проверить ваш код
    */
 
-    public static int sumDigits(Integer number) {
-        int result = 0;
-        if (number == null) {
-            return -1;
+    public static Integer sumDigits(Integer number) {
+        String s = Integer.toString(number);
+        Integer sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+            sum += Character.getNumericValue((s.charAt(i)));
         }
-        while (number > 0) {
-            result += number % 10;
-            number /= 10;
-
-        }
-        return result;
+        return sum;
     }
 }
