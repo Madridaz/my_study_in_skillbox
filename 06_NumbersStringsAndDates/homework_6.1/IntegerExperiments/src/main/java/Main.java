@@ -1,13 +1,13 @@
 public class Main {
 
-  public static void main(String[] args) {
-    Container container = new Container();
-    container.count += 7843;
+    public static void main(String[] args) {
+        Container container = new Container();
+        container.count += 7843;
 
-    int sum = sumDigits(7843);
+        int sum = sumDigits(12345);
 
-    System.out.println(sum);
-  }
+        System.out.println(sum);
+    }
 
   /* Реализуйте метод sumDigits который возвращает сумму цифр числа, пример:
   передано 12345, метод должен вернуть 15
@@ -19,8 +19,16 @@ public class Main {
   В противном случае тестовый метод не сможет проверить ваш код
    */
 
-  public static int sumDigits(Integer number) {
-    //@TODO: write code here and delete TODO line
-    return 0;
-  }
+    public static int sumDigits(Integer number) {
+        int result = 0;
+        if (number == null) {
+            return -1;
+        }
+        while (number > 0) {
+            result += number % 10;
+            number /= 10;
+
+        }
+        return result;
+    }
 }
