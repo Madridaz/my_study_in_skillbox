@@ -1,19 +1,28 @@
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NumberFormatException {
 
     String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
-    String sum1, sum2, sum3;
+    String newText = text.replaceAll(",","");
+    String[] words = newText.split(" ");
 
-    sum1 = text.substring(text.indexOf("л") + 2, text.indexOf("у") - 2);
-    sum2 = text.substring(text.indexOf("-") + 2, text.indexOf("М") - 10);
-    sum3 = text.substring(text.indexOf("ш") + 5, text.length() - 7);
-    sum1.trim();
-    sum2.trim();
-    sum3.trim();
+    int salary[] = new int[words.length];
 
-    int result = Integer.parseInt(sum1) + Integer.parseInt(sum2) + Integer.parseInt(sum3);
-    System.out.println(result);
+    for (int i = 0; i < words.length; i++) {
+      try {
+        salary[i] = Integer.parseInt(words[i]);
+      } catch (NumberFormatException e) {
+
+      }
+     } 
+         
+    int sum = 0;
+    for (int element : salary)
+    sum += element;
+    
+      
+      System.out.println(sum);
+    
+    }
   }
-}
 
