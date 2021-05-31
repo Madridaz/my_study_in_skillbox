@@ -9,7 +9,7 @@ class MainTest {
 
     @Test
     @DisplayName("Введенная дата больше текущей")
-    public void futureDate() {
+    public void futureDate() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, 1);
         launch(calendar.get(Calendar.DAY_OF_MONTH),
@@ -19,7 +19,7 @@ class MainTest {
 
     @Test
     @DisplayName("Введен декабрь предыдущего года")
-    public void thirtyFirstOfDecember() {
+    public void thirtyFirstOfDecember() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR) - 1;
         calendar.set(year, Calendar.DECEMBER, 31);
@@ -35,7 +35,7 @@ class MainTest {
 
     @Test
     @DisplayName("Введена текущая дата")
-    public void currentDate() {
+    public void currentDate() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH) + 1;
@@ -47,7 +47,7 @@ class MainTest {
 
     @Test
     @DisplayName("Введен прошлый год")
-    public void lastYearDate() {
+    public void lastYearDate() throws InterruptedException {
         Calendar calendar = new GregorianCalendar();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH) + 1;
@@ -67,7 +67,7 @@ class MainTest {
 
     @Test
     @DisplayName("Введенно первое января текущего года")
-    public void firstOfJanuary() {
+    public void firstOfJanuary() throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         calendar.set(year, Calendar.JANUARY, 1);
@@ -76,7 +76,7 @@ class MainTest {
         launch(1, 1, year, exp);
     }
 
-    private void launch(int day, int month, int year, String exp) {
+    private void launch(int day, int month, int year, String exp) throws InterruptedException {
         String act = Main.collectBirthdays(year, month, day);
         Assertions.assertEquals(exp, replaceSeparatorToCurrentOs(act));
     }
