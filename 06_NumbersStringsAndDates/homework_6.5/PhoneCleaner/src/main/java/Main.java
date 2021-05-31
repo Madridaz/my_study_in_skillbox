@@ -15,6 +15,9 @@ public class Main {
 
         String output = input.replaceAll("[^0-9]", "");
         System.out.println(output);
+        if (output.startsWith("8")) {
+          System.out.println(output.replace("8", "7"));
+        }
 
       } else {
         System.out.println("Неверный формат номера");
