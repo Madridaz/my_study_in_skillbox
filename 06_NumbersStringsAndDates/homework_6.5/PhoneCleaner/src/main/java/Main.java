@@ -6,11 +6,19 @@ public class Main {
 
     Scanner scanner = new Scanner(System.in);
     while (true) {
+      System.out.println("Введите номер телефона");
       String input = scanner.nextLine();
       if (input.equals("0")) {
         break;
       }
-      //TODO:напишите ваш код тут, результат вывести в консоль.
+      if (input.matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) {
+
+        String output = input.replaceAll("[^0-9]", "");
+        System.out.println(output);
+
+      } else {
+        System.out.println("Неверный формат номера");
+      }
     }
   }
 
