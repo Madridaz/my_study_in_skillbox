@@ -19,7 +19,8 @@ class ReverseArrayTest {
     @Test
     @DisplayName("Метод возвращает перевернутый массив")
     void reverseNotEmptyArray() {
-        String[] testArray = {"1", "2", "3", "4", "5", "6", "7", "aa", "bb", "ccc", "ddd", "eee", "fff", "ggg", "hhh"};
+        String[] testArray = {"1", "2", "3", "4", "5", "6", "7", "aa", "bb", "ccc", "ddd", "eee",
+            "fff", "ggg", "hhh"};
         String[] expected = {"hhh", "ggg", "fff", "eee", "ddd", "ccc", "bb", "aa", "7", "6", "5", "4", "3", "2", "1"};
         assertEquals(Arrays.toString(expected), Arrays.toString(ReverseArray.reverse(testArray)));
     }
