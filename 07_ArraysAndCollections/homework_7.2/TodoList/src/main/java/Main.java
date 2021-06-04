@@ -1,4 +1,8 @@
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -12,30 +16,52 @@ public class Main {
     while (true) {
       String name = scanner.nextLine();
 
+      if (name.matches("(ADD)\\s\\D+")) {
+        System.out.println("Добавлено в конец списка");
+        String data = name.replace("ADD ", "");
+        todoList.add(data);
+      } else if (name.matches("ADD\\s(\\d+)\\s(.+)")) {
+        System.out.println("Режим добавления по индексу");
+        String[] data = name.split(" ");
+        String index = data[1];
+        if (index.matches("\\d+")) {
+          int indexCut = Integer.parseInt(index);
+          try {
+            todoList.add(indexCut, data[2]);
+          } catch (IndexOutOfBoundsException exception) {
+            System.out.println("Введен несуществующий индекс, добавление будет в конец списка");
+            todoList.add(data[2]);
+          }
+        }
+      } else if (name.matches("EDIT\\s(\\d+)\\s(.+)")) {
+        System.out.println("Режим замены по индексу");
+        String[] data = name.split(" ");
+        String index = data[1];
+        if (index.matches("\\d+")) {
+          int indexCut = Integer.parseInt(index);
+          try {
+            todoList.edit(data[2], indexCut);
+          } catch (IndexOutOfBoundsException exception) {
+            System.out.println("Введен несуществующий индекс, замены не будет");
+          }
+        }
+      }
+      else if (name.matches("DELETE\\s(\\d+)")) {
+        System.out.println("Режим удаления по индексу");
+        String[] data = name.split(" ");
+        String index = data[1];
+        if (index.matches("\\d+")) {
+          int indexCut = Integer.parseInt(index);
+          try {
+            todoList.delete(indexCut);
+          } catch (IndexOutOfBoundsException exception) {
+            System.out.println("Введен несуществующий индекс, удаления не будет");
+          }
+        }
+      }
       if (name.contains("LIST")) {
         todoList.getTodos();
       }
-      //lovit tolko ADD obrezaet i zanosit delo v konec spiska
-      if (name.matches("(ADD)\\s\\D+")) {
-        System.out.println("tolko ADD");
-        String data = name.replace("ADD ", "");
-        todoList.add(data);
-      }
-      //dolzen lovit ADD i index i delo, proverit index!>=todolist.size i zanesti v spisok po indeksu
-      else if (name.matches("[(A-Z)]?(\\s)(\\d)(\\s)(.+)")) {
-        System.out.println("ADD i index");
-
-        String data = name.replaceAll("[(A-Z)]?(\\s)(\\d)(\\s)", "");
-        String indexCut = name.replaceAll("[(A-Z)]?(\\s)(\\s)(.+)", "");
-       // int index = Integer.parseInt(indexCut);
-        System.out.println(indexCut);
-        System.out.println(data);
-        todoList.add(index, data);
-      //}
-
-//      else {
-//        System.out.println("net");
-//      }
     }
   }
 }
