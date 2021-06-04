@@ -45,8 +45,7 @@ public class Main {
             System.out.println("Введен несуществующий индекс, замены не будет");
           }
         }
-      }
-      else if (name.matches("DELETE\\s(\\d+)")) {
+      } else if (name.matches("DELETE\\s(\\d+)")) {
         System.out.println("Режим удаления по индексу");
         String[] data = name.split(" ");
         String index = data[1];
