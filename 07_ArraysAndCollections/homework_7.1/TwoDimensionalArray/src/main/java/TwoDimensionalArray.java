@@ -1,27 +1,19 @@
+import java.util.Arrays;
+
 public class TwoDimensionalArray {
 
-  public static char symbol = 'X';
-
   public static char[][] getTwoDimensionalArray(int size) {
+    char[][] array = new char[size][size];
 
-    char[][] array = {
-        {'X', ' ', ' ', ' ', ' ', ' ', 'X'},
-        {' ', 'X', ' ', ' ', ' ', 'X', ' '},
-        {' ', ' ', 'X', ' ', 'X', ' ', ' '},
-        {' ', ' ', ' ', 'X', ' ', ' ', ' '},
-        {' ', ' ', 'X', ' ', 'X', ' ', ' '},
-        {' ', 'X', ' ', ' ', ' ', 'X', ' '},
-        {'X', ' ', ' ', ' ', ' ', ' ', 'X'}
-    };
-
-    for (int i = 0; i < array.length; i++) {
-      for (int j = 0; j < array.length; j++) {
-        System.out.print(array[i][j]);
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        if (i == j || (i + j + 1 == size)) {
+          array[i][j] = 'X';
+        } else {
+          array[i][j] = ' ';
+        }
       }
-      System.out.println();
-
     }
-
-    return new char[0][0];
+    return array;
   }
 }

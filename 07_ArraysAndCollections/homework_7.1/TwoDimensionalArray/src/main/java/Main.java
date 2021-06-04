@@ -1,11 +1,16 @@
+import java.util.Arrays;
+
 public class Main {
 
-  public static void main(String[] args) throws InterruptedException {
-    //Распечатайте сгенерированный в классе TwoDimensionalArray.java двумерный массив
-    // [X,  , X]
-    // [ , X,  ]
-    // [X,  , X]
+  public static void main(String[] args) {
 
-    TwoDimensionalArray.getTwoDimensionalArray(7);
+    char[][] array = TwoDimensionalArray.getTwoDimensionalArray(7);
+
+    for (char[] arrayLine : array) {
+      for (char arrayValue : arrayLine) {
+        System.out.print(arrayValue);
+      }
+      System.out.println();
+    }
   }
 }
