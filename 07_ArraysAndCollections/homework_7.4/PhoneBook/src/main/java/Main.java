@@ -11,11 +11,13 @@ public class Main {
         phoneBook.getPhonesByName(input);
 
       } else if (input.matches(
-          "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) { //введен телефон
+          "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) { // введен телефон
         phoneBook.getNameByPhone(input);
 
       } else if (input.contains("LIST")) {
         phoneBook.getAllContacts();
+      } else {
+        System.out.println("Ошибка ввода, повторите");
       }
     }
   }
@@ -24,6 +26,5 @@ public class Main {
     PhoneBook phoneBook = new PhoneBook();
     System.out.println("Введите номер, имя или команду:");
     checkInput(phoneBook);
-
   }
 }
