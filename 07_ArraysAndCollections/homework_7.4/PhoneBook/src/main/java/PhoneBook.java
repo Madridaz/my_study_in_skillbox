@@ -36,11 +36,18 @@ public class PhoneBook {
   public String getNameByPhone(String phone) {
     // формат одного контакта "Имя - Телефон"
     // если контакт не найдены - вернуть пустую строку
-    Set<String> phones = new HashSet<>();
-    for (String name : contacts.keySet()) {
-      phones.addAll(contacts.get(name));
-      System.out.println("есть");
-
+    for(Map.Entry<String, Set<String>> entry: contacts.entrySet()) {
+      boolean check = false;
+      for(String val: entry.getValue()) {
+        if(val.equals(phone)) {
+          System.out.println(entry.getKey() + " - " + phone);
+          check = true;
+          break;
+        }
+      }
+    if(check) {
+      break;
+    }
     }
 
     return "";
