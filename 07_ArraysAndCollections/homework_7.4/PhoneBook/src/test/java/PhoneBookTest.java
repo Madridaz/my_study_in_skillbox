@@ -22,7 +22,7 @@ class PhoneBookTest {
     }
 
     @Test
-    @DisplayName("Передан неверный формат телефонного номера")
+    @DisplayName("Передан неверный формат имени")
     void addNotValidName() {
         phoneBook.addContact("79001234567", "79001234567");
         assertEquals(Collections.emptySet(), phoneBook.getAllContacts());

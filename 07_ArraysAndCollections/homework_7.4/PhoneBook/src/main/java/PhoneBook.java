@@ -1,88 +1,95 @@
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class PhoneBook {
 
-  HashMap<String, Set<String>> contacts = new HashMap<>();
+  Map<String, Set<String>> contacts = new HashMap<>();
 
-  public void addContact(String name, String phone) {
+  public boolean isPhone(String input) {
+    return input.matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
+  }
+
+  public boolean isName(String input) {
+    return input.matches("[A-ZА-ЯЁ]{1}[a-zа-яё]+");
+  }
+
+  public void addContact(String phone, String name) { //работает
     // проверьте корректность формата имени и телефона
     // если такой номер уже есть в списке, то перезаписать имя абонента
-    Set<String> phones = new TreeSet<>();
-    if (phones.contains(phone)) {
-      contacts.put(name, phones);
-      System.out.println("Контакт перезаписан");
+    if (name.isEmpty() || phone.isEmpty()) {
+      return;
+    }
+    if (!isPhone(phone)) {
+//        "\\d{11}")) {
+      System.out.println("Введен неправильный номер");
+      return;
+    }
+    if (!isName(name)) {
+      System.out.println("Введено неправильное имя");
       return;
     }
 
+    Set<String> phones = getPhonesByName(name);
     phones.add(phone);
-    contacts.put(name, phones);
-    System.out.println("Контакт сохранен");
-  }
-
-  public boolean presentPhone(HashMap<String, Set<String>> contacts, String phone) {
-    for (Set<String> phones : contacts.values()) {
-      if (phones.contains(phone)) {
-        return true;
-      }
+    String nameByPhone = getNameByPhone(phone);
+    if (!"".equals(nameByPhone)) {
+      contacts.remove(nameByPhone.substring(0, nameByPhone.indexOf(" ")));
     }
-    return false;
+    contacts.put(name, phones);
+    System.out.println("Контакт сохранен!");
   }
 
   public String getNameByPhone(String phone) {
     // формат одного контакта "Имя - Телефон"
     // если контакт не найдены - вернуть пустую строку
-    for(Map.Entry<String, Set<String>> entry: contacts.entrySet()) {
-      boolean check = false;
-      for(String val: entry.getValue()) {
-        if(val.equals(phone)) {
-          System.out.println(entry.getKey() + " - " + phone);
-          check = true;
-          break;
+    for (String name : contacts.keySet()) {
+      for (String phones : contacts.get(name)) {
+        if (phones.contains(phone)) {
+          return name + " - " + phone;
         }
       }
-    if(check) {
-      break;
     }
-    }
-
     return "";
   }
 
   public Set<String> getPhonesByName(String name) {
     // формат одного контакта "Имя - Телефон"
     // если контакт не найден - вернуть пустой TreeSet
-    TreeSet<String> info = new TreeSet();
-
-    if (contacts.get(name) != null) {
-      System.out.println(name + " " + contacts.get(name));
-    } else {
-      System.out.println(
-          "Такого имени в телефонной книге нет."
-              + "\n"
-              + "Введите номер телефона для абонента: "
-              + name);
-      Scanner scanner = new Scanner(System.in);
-      String number = scanner.nextLine();
-      addContact(name, number);
+    if (contacts.containsKey(name)) {
+      Set<String> allPhones = contacts.get(name);
+      String outPut = name + " - " + String.join(", ", allPhones);
+      Set<String> contact = new TreeSet<>();
+      contact.add(outPut);
+      return contact;
     }
-
     return new TreeSet<>();
   }
 
-  public Set<String> getAllContacts() {
+  public void printOneContact(Set<String> contactAndNumber, String name) {
+    Set<String> onlyPhones = new TreeSet<>();
+    for (String one : contactAndNumber) {
+      String deleteName = one.replace(name + " - ", "");
+      onlyPhones.add(deleteName);
+    }
+    System.out.println(name + " - " + String.join(", ", onlyPhones));
+  }
+
+  public Set<String> getAllContacts() { //разобраться с выводом в консоль и зачем TreeSet тут?
     // формат одного контакта "Имя - Телефон"
     // если контактов нет в телефонной книге - вернуть пустой TreeSet
-    final Set<String> names = contacts.keySet();
-    for (String name : names) {
-      final Set<String> phones = contacts.get(name);
-      final String joinPhone = String.join(", ", phones);
-      System.out.println(name + " - " + joinPhone);
+    if (contacts.isEmpty()) {
+      return Collections.emptySet();
     }
-    return new TreeSet<>();
+    final TreeSet<String> allContact = new TreeSet<>();
+    for (Entry<String, Set<String>> entry : contacts.entrySet()) {
+      final Set<String> phones = contacts.get(entry.getKey());
+      allContact.add(entry.getKey() + " - " + String.join(", ", phones));
+    }
+    return allContact;
   }
+
 }
