@@ -9,7 +9,7 @@ public class CoolNumbers {
   //метод для заполнения списка нужным количеством сгенерированных номеров
   public static List<String> generateCoolNumbers() {
     List<String> carNumbers = new ArrayList<>();
-    for (int i = 0; i < 2_000_000; i++) {
+    for (int i = 0; i < 2_000_001; i++) {
       carNumbers.add(generateOneNumber());
     }
     System.out.println(carNumbers);
@@ -33,17 +33,16 @@ public class CoolNumbers {
     }
   }
 
-
   public static boolean searchInHashSet(HashSet<String> hashSet, String number) {
-    if(hashSet.contains(number)) {
+    if (hashSet.contains(number)) {
       return true;
     }
-    
+
     return false;
   }
 
   public static boolean searchInTreeSet(TreeSet<String> treeSet, String number) {
-    if(treeSet.contains(number)) {
+    if (treeSet.contains(number)) {
       return true;
     }
     return false;
@@ -51,7 +50,7 @@ public class CoolNumbers {
 
   //метод для генерации одного автомобильного номера
   public static String generateOneNumber() {
-    final char[] carLetters = {'а', 'в', 'е', 'к', 'м', 'н', 'о', 'р', 'с', 'т', 'у', 'х'};
+    final char[] carLetters = {'А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х'};
 
     //первая буква номера
     int x = (int) Math.floor(Math.random() * carLetters.length);
