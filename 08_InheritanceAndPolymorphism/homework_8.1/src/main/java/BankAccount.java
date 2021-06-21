@@ -1,31 +1,31 @@
 public class BankAccount {
 
-  double bA;
+  private double bankAccountBill;
 
-  public double getAmount() {
-    System.out.println("Остаток на счете BankAccount " + bA);
-    return bA;
+  protected double getAmount() {
+    System.out.println("Остаток на счете BankAccount " + bankAccountBill);
+    return bankAccountBill;
   }
 
-  public void put(double amountToPut) {
+  protected void put(double amountToPut) {
     if (amountToPut <= 0) {
       System.out.println("Сумма пополнения меньше или равна нулю");
     } else {
-      bA = bA + amountToPut;
+      bankAccountBill = bankAccountBill + amountToPut;
       System.out.println("счет BankAccount пополнен на " + amountToPut);
     }
   }
 
-  public void take(double amountToTake) {
-    if (amountToTake < bA) {
-      bA = bA - amountToTake;
+  protected void take(double amountToTake) {
+    if (amountToTake < bankAccountBill) {
+      bankAccountBill = bankAccountBill - amountToTake;
       System.out.println("Снято c BankAccount " + amountToTake);
     } else {
       System.out.println("Сумма превышает остаток на счете");
     }
   }
 
-  boolean send(BankAccount receiver, double amount) {
+  protected boolean send(BankAccount receiver, double amount) {
     this.take(amount);
     receiver.put(amount);
 
