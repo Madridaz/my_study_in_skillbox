@@ -3,16 +3,16 @@ import java.time.LocalDate;
 public class DepositAccount extends BankAccount {
 
   private double depositAccountBill;
-  LocalDate lastPutTime;
+  private LocalDate lastPutTime;
 
   @Override
-  protected double getAmount() {
+  public double getAmount() {
     System.out.println("Остаток на счете DepositAccount " + depositAccountBill);
     return depositAccountBill;
   }
 
   @Override
-  protected void put(double amountToPut) {
+  public void put(double amountToPut) {
     LocalDate put = LocalDate.now();
     lastPutTime = put;
 
@@ -25,7 +25,7 @@ public class DepositAccount extends BankAccount {
   }
 
   @Override
-  protected void take(double amountToTake) {
+  public void take(double amountToTake) {
     LocalDate timeOfTake = LocalDate.now();
 
     if (lastPutTime.getMonthValue() < timeOfTake.getMonthValue()) {
