@@ -2,13 +2,13 @@ import java.time.LocalDate;
 
 public class DepositAccount extends BankAccount {
 
-  double dA;
-  LocalDate lastPutTime;
+  private double depositAccountBill;
+  private LocalDate lastPutTime;
 
   @Override
   public double getAmount() {
-    System.out.println("Остаток на счете DepositAccount " + dA);
-    return dA;
+    System.out.println("Остаток на счете DepositAccount " + depositAccountBill);
+    return depositAccountBill;
   }
 
   @Override
@@ -19,7 +19,7 @@ public class DepositAccount extends BankAccount {
     if (amountToPut <= 0) {
       System.out.println("Сумма пополнения меньше или равна нулю");
     } else {
-      dA = dA + amountToPut;
+      depositAccountBill = depositAccountBill + amountToPut;
       System.out.println("счет DepositAccount пополнен на " + amountToPut);
     }
   }
@@ -29,8 +29,8 @@ public class DepositAccount extends BankAccount {
     LocalDate timeOfTake = LocalDate.now();
 
     if (lastPutTime.getMonthValue() < timeOfTake.getMonthValue()) {
-      if (amountToTake < dA) {
-        dA = dA - amountToTake;
+      if (amountToTake < depositAccountBill) {
+        depositAccountBill = depositAccountBill - amountToTake;
         System.out.println("Снято c DepositAccount " + amountToTake);
       } else {
         System.out.println("Сумма превышает остаток на счете");
