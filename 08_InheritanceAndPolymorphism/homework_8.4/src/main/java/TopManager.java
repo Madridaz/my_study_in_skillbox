@@ -1,15 +1,26 @@
 public class TopManager implements Employee {
 
-  private static final int TOPMANAGERSALARY = 30_000;
-  Company company = new Company();
+  private String name;
+  private static final int SALARY = 30_000;
+
+  public TopManager(String name) {
+    this.name = name;
+    getMonthSalary();
+  }
+
+  @Override
+  public String toString() {
+    return "топменеджер " + this.name + ", зарплата - " + getMonthSalary();
+  }
 
   //генерация зарплаты топ-менеджера
   @Override
   public int getMonthSalary() {
-    if (company.getIncome() > 10_000_000) {
-      return TOPMANAGERSALARY + (int) (TOPMANAGERSALARY * 1.5);
+    if (Company.getIncome() > 10_000_000) {
+      return SALARY + (int) (SALARY * 1.5);
     } else {
-      return TOPMANAGERSALARY;
+      return SALARY;
     }
+
   }
 }

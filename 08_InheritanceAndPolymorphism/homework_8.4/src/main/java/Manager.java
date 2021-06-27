@@ -1,6 +1,17 @@
 public class Manager implements Employee {
 
-  private static final int MANAGERSALARY = 20_000;
+  private String name;
+  private static final int SALARY = 20_000;
+
+  public Manager(String name) {
+    this.name = name;
+    getMonthSalary();
+  }
+
+  @Override
+  public String toString() {
+    return "менеджер " + this.name + ", зарплата - " + getMonthSalary();
+  }
 
   //генерация зарплаты менеджера
   @Override
@@ -9,7 +20,7 @@ public class Manager implements Employee {
     int earnedMax = 140_000;
 
     int moneyEarnedForTheCompany = (int) ((Math.random() * (earnedMax - earnedMin)) + earnedMin);
-    int finalSalary = MANAGERSALARY + (int) (moneyEarnedForTheCompany * 0.05);
-    return finalSalary;
+    return SALARY + (int) (moneyEarnedForTheCompany * 0.05);
+
   }
 }
