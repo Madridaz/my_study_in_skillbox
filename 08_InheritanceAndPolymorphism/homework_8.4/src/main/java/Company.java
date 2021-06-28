@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Company {
@@ -16,10 +17,10 @@ public class Company {
     employees.add(employee);
   }
 
-  //метод нанимает указанное число сотрудников указанного типа
-  public void hireAll(Employee employee, int count) {
+  //метод нанимает определенное число сотрудников указанного типа
+  public void hireAll(String position, int count) {
     for (int i = 0; i < count; i++) {
-      employees.add(employee);
+      employees.add(EmployeeFactory.getOne(position));
     }
   }
 
@@ -30,10 +31,30 @@ public class Company {
 
   //метод выводит список всех сотрудников переданной компании
   public void showAllEmployees(Company company) {
-    for (int i = 0, j = 1; i < employees.size(); i++, j++) {
-      System.out.print(j + ". ");
-      System.out.println(employees.get(i));
+    for (int i = 0; i < employees.size(); i++) {
+      System.out.println((i + 1) + ". " + employees.get(i));
     }
   }
+
+  public List<Integer> getLowestSalaryStaff(int count) {
+    List<Integer> salaries = new ArrayList<>();
+    for (int i = 0; i<employees.size(); i++) {
+      salaries.add(employees.get(i).getMonthSalary());
+    }
+    Collections.sort(salaries);
+    System.out.println(salaries);
+    return salaries;
+  }
+
+  public List<Integer> getTopSalaryStaff(int count) {
+    List<Integer> salaries = new ArrayList<>();
+    for (int i = 0; i<employees.size(); i++) {
+      salaries.add(employees.get(i).getMonthSalary());
+    }
+    Collections.sort(salaries, Collections.reverseOrder());
+    System.out.println(salaries);
+    return salaries;
+  }
+
 
 }

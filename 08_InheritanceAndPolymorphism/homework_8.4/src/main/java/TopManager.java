@@ -2,10 +2,11 @@ public class TopManager implements Employee {
 
   private String name;
   private static final int SALARY = 30_000;
+  private int finalSalary = getMonthSalary();
 
   public TopManager(String name) {
     this.name = name;
-    getMonthSalary();
+
   }
 
   @Override
