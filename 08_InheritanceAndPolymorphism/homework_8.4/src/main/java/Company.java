@@ -5,11 +5,15 @@ import java.util.List;
 public class Company {
 
   List<Employee> employees = new ArrayList();
-  private static long income = 200_000_000;
 
+  Company company;
   //метод получения дохода компании
   public static long getIncome() {
-    return income;
+    int minIncome = 5_000_000;
+    int maxIncome = 10_000_000;
+
+    return (long) ((Math.random() * (maxIncome - minIncome)) + minIncome);
+
   }
 
   //метод нанимает одного сотрудника указанного типа
@@ -20,7 +24,7 @@ public class Company {
   //метод нанимает определенное число сотрудников указанного типа
   public void hireAll(String position, int count) {
     for (int i = 0; i < count; i++) {
-      employees.add(EmployeeFactory.getOne(position));
+      employees.add(EmployeeFactory.getOne(position, company));
     }
   }
 
@@ -38,7 +42,7 @@ public class Company {
 
   public List<Integer> getLowestSalaryStaff(int count) {
     List<Integer> salaries = new ArrayList<>();
-    for (int i = 0; i<employees.size(); i++) {
+    for (int i = 0; i < employees.size(); i++) {
       salaries.add(employees.get(i).getMonthSalary());
     }
     Collections.sort(salaries);
@@ -48,7 +52,7 @@ public class Company {
 
   public List<Integer> getTopSalaryStaff(int count) {
     List<Integer> salaries = new ArrayList<>();
-    for (int i = 0; i<employees.size(); i++) {
+    for (int i = 0; i < employees.size(); i++) {
       salaries.add(employees.get(i).getMonthSalary());
     }
     Collections.sort(salaries, Collections.reverseOrder());

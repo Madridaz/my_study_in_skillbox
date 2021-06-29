@@ -1,14 +1,14 @@
 public class Main {
 
   public static void main(String[] args) {
-    Company apple = new Company();
+    Company company = new Company();
 
-    apple.hireAll("operator", 180);
-    apple.hireAll("manager", 80);
-    apple.hireAll("topmanager", 10);
-    apple.showAllEmployees(apple);
-    apple.getTopSalaryStaff(15);
-    apple.getLowestSalaryStaff(15);
+    company.hireAll("operator", 5);
+    company.hireAll("manager", 5);
+    company.hireAll("topmanager", 5);
+    company.showAllEmployees(company);
+    company.getTopSalaryStaff(15);
+    company.getLowestSalaryStaff(15);
 
 
   }

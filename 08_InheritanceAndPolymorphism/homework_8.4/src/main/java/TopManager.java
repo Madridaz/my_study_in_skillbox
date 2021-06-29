@@ -3,9 +3,11 @@ public class TopManager implements Employee {
   private String name;
   private static final int SALARY = 30_000;
   private int finalSalary = getMonthSalary();
+  Company company;
 
-  public TopManager(String name) {
+  public TopManager(String name, Company company) {
     this.name = name;
+    this.company = company;
 
   }
 
