@@ -9,8 +9,8 @@ public class Company {
   Company company;
   //метод получения дохода компании
   public static long getIncome() {
-    int minIncome = 5_000_000;
-    int maxIncome = 10_000_000;
+    int minIncome = 7_000_000;
+    int maxIncome = 200_000_000;
 
     return (long) ((Math.random() * (maxIncome - minIncome)) + minIncome);
 

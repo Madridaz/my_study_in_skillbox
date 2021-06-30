@@ -19,7 +19,7 @@ public class TopManager implements Employee {
   //генерация зарплаты топ-менеджера
   @Override
   public int getMonthSalary() {
-    if (Company.getIncome() > 10_000_000) {
+    if (company.getIncome() > 10_000_000) {
       return SALARY + (int) (SALARY * 1.5);
     } else {
       return SALARY;
