@@ -21,10 +21,10 @@ public class Main {
     LocalTime currentTime = LocalTime.now();
     return airport.getTerminals().stream()
         .flatMap(terminal -> terminal.getFlights().stream())
-        .sorted(Comparator.comparing(Flight::getDate))
+        //.sorted(Comparator.comparing(Flight::getDate))
         .filter(flight -> flight.getType() == Type.DEPARTURE)
         .filter(flight -> flight.getDate().toInstant().atZone(ZoneId.systemDefault())
-            .toLocalTime().isAfter(currentTime))
+            .toLocalTime().isBefore(currentTime.plusHours(2)))
         .collect(Collectors.toList());
   }
 
