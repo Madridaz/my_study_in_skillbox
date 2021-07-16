@@ -1,10 +1,8 @@
 import com.skillbox.airport.Airport;
 import com.skillbox.airport.Flight;
 import com.skillbox.airport.Flight.Type;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
