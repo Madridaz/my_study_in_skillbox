@@ -21,7 +21,7 @@ public class CustomerStorage {
     if (components.length != currentSize) {
       throw new IllegalArgumentException("Строка data имеет неверный формат");
     } else if (!components[2]
-        .matches("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")) {
+        .matches("[a-z]+@[a-z]+\\.[a-z]+")) {
       throw new IllegalArgumentException("Формат email неверный");
     } else if (!components[3]
         .matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$")) {
