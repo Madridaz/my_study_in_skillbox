@@ -1,4 +1,4 @@
-package core;
+package src.java.core;
 
 public class Station implements Comparable<Station>
 {

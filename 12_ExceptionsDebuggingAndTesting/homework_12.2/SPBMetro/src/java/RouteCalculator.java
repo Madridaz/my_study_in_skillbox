@@ -1,4 +1,6 @@
-import core.Station;
+package src.java;
+
+import src.java.core.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
