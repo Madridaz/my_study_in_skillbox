@@ -68,7 +68,7 @@ public class Main {
             System.out.println("Станция не найдена :(");
         }
     }
-
+//метод получает данные из файла map.json
     private static void createStationIndex() {
         stationIndex = new StationIndex();
         try {
