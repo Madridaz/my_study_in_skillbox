@@ -1,7 +1,5 @@
-package src.java;
-
-import src.java.core.Line;
-import src.java.core.Station;
+import core.Line;
+import core.Station;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static final String DATA_FILE = "src/resources/map.json";
+    private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
 
     private static StationIndex stationIndex;
@@ -68,7 +66,7 @@ public class Main {
             System.out.println("Станция не найдена :(");
         }
     }
-//метод получает данные из файла map.json
+
     private static void createStationIndex() {
         stationIndex = new StationIndex();
         try {
