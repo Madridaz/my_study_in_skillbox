@@ -10,8 +10,7 @@ public class Main {
         System.out.println("Введите куда нужно скопировать");
         String destinationFolder = reader.readLine();
 
-        System.out.println(sourceFolder + " " + destinationFolder);
-
         FileUtils.copyFolder(sourceFolder, destinationFolder);
+        System.out.println("Копирование завершено");
     }
 }
