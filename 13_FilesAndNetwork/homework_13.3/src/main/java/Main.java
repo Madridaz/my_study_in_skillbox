@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
 
@@ -7,13 +6,14 @@ public class Main {
         final String FILE_TO_READ = "C:\\Users\\home\\IdeaProjects\\java_basics\\13_FilesAndNetwork\\files\\movementList.csv";
         Movements movements = new Movements(FILE_TO_READ);
 
-
         movements.readFile(FILE_TO_READ);
-        System.out.println("проверка");
-        System.out.println(movements.allLines);
 
-
+        System.out.println("Сумма расходов: " + movements.getExpenseSum() + " руб.");
+        System.out.println("Сумма доходов: " + movements.getIncomeSum() + " руб.");
+        movements.getAllExpense();
 
 
     }
+
+
 }

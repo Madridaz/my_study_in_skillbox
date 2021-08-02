@@ -2,9 +2,12 @@ import au.com.bytecode.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Movements {
 
@@ -16,7 +19,10 @@ public class Movements {
     private String detailsOfOperation;
     private double income;
     private double expense;
+    private double resultExpense;
+    private double resultIncome;
     List<Movements> allLines = new ArrayList<>();
+    private static final NumberFormat format = NumberFormat.getInstance(new Locale("ru"));
 
     public Movements(String accountType, String accountNumber, String currency, String operationDate, String reference, String detailsOfOperation, double income, double expense) {
         this.accountType = accountType;
@@ -50,7 +56,6 @@ public class Movements {
 
         while ((nextLine = reader.readNext()) != null) {
             if (nextLine != null) {
-                //System.out.println(Arrays.toString(nextLine));
                 nextLine[7].replace("\"", "");
                 nextLine[7].replace(",", ".");
 
@@ -58,9 +63,9 @@ public class Movements {
                 try {
                     allLines.add(new Movements(nextLine[0], nextLine[1], nextLine[2],
                             nextLine[3], nextLine[4], nextLine[5], Double.parseDouble(nextLine[6]),
-                            Double.parseDouble(nextLine[7])));
+                            format.parse(nextLine[7]).doubleValue()));
 
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | ParseException e) {
                     System.err.println("дробное число не добавлено");
                 }
             }
@@ -68,13 +73,31 @@ public class Movements {
     }
 
     public double getExpenseSum() {
-
-        return 0.0;
+        for (int i = 0; i < allLines.size(); i++) {
+            resultExpense += allLines.get(i).expense;
+        }
+        return resultExpense;
     }
 
     public double getIncomeSum() {
+        for (int i = 0; i < allLines.size(); i++) {
+            resultIncome += allLines.get(i).income;
+        }
+        return resultIncome;
+    }
 
-        return 0.0;
+    public void getAllExpense() {
+        List<String> info = new ArrayList<>();
+        for (int i = 0; i < allLines.size(); i++) {
+            String cut = allLines.get(i).detailsOfOperation.replace("548673++++++1028", "");
+            cut.replaceAll(" .*", "");
+
+            info.add(cut + " - сумма: " + allLines.get(i).expense + " рублей");
+        }
+        Collections.sort(info);
+        for (int i = 0; i < info.size(); i++) {
+            System.out.println(info.get(i));
+        }
     }
 }
 
