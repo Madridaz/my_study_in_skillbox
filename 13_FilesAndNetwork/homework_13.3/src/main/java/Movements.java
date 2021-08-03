@@ -89,10 +89,11 @@ public class Movements {
     public void getAllExpense() {
         List<String> info = new ArrayList<>();
         for (int i = 0; i < allLines.size(); i++) {
-            String cut = allLines.get(i).detailsOfOperation.replace("548673++++++1028", "");
-            cut.replaceAll(" .*", "");
+            String cut = allLines.get(i).detailsOfOperation.replace("(\\d{1,2}\\.\\d{1,2}\\.\\d{2})", "");
+            String cut2 = cut.replace("548673++++++1028    ", "");
+            String cut3 = cut2.substring(0,40);
 
-            info.add(cut + " - сумма: " + allLines.get(i).expense + " рублей");
+            info.add(cut3 + " - сумма: " + allLines.get(i).expense + " рублей");
         }
         Collections.sort(info);
         for (int i = 0; i < info.size(); i++) {
