@@ -41,17 +41,22 @@ public class GetImages {
 
     //скачивает выбранный файл и сохраняет в папке
     public void saveImgFileToFolder() {
+        String way = "data/images/";
 
-        try (BufferedInputStream in = new BufferedInputStream(new URL(allLinks.get(15)).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("data/images/15.jpg")) {
-            byte dataBuffer[] = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
+        for (int i = 0; i < allLinks.size(); i++) {
+            String originalName = allLinks.get(i).replace("https://icdn.lenta.ru/images/","");
+            String originalName2 = originalName.replaceAll("\\d+/","");
+           // String type = ".jpg";
+            try (BufferedInputStream in = new BufferedInputStream(new URL(allLinks.get(i)).openStream());
+                 FileOutputStream fileOutputStream = new FileOutputStream(way + originalName2)) {
+                byte dataBuffer[] = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                    fileOutputStream.write(dataBuffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                e.getMessage();
             }
-        } catch (IOException e) {
-            // handle exception
-
         }
     }
 }
