@@ -1,3 +1,4 @@
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,25 +8,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.TreeSet;
 
 public class MoscowSubway {
     private static final String WEB_SITE = "https://www.moscowmap.ru/metro.html#lines";
     private static final String FILENAME = "C:\\Users\\home\\IdeaProjects\\java_basics\\13_FilesAndNetwork\\homework_13_5\\src\\main\\resources\\MoscowSubwayMap.json";
 
     Document doc = getDocumentFromFile();
-    LinkedHashMap<String, String> lines = getAllLines();
-    LinkedHashMap<String, LinkedHashSet<String>> stations = getAllStations();
+    LinkedHashMap<String, String> linesAndStations = getAllLinesAndStations();
 
     public MoscowSubway() throws IOException {
     }
-
-    //    //Получение кода страницы сайта метрополитена
-//    public Document getDocumentFromWeb() throws IOException {
-//        Document doc = Jsoup.connect(WEB_SITE).maxBodySize(0).get();
-//        return doc;
-//    }
 
     //Получение кода страницы из файла
     private Document getDocumentFromFile() throws IOException {
@@ -34,43 +26,39 @@ public class MoscowSubway {
         return doc;
     }
 
-    //Получение всех линий метро
-    private LinkedHashMap<String, String> getAllLines() throws IOException {
-        Elements elements = getDocumentFromFile().select(".js-metro-line");
-        LinkedHashMap<String, String> lines = new LinkedHashMap<>();
-        for (int i = 0; i < elements.size(); i++) {
-            String key = elements.get(i).attr("data-line");
-            String value = elements.get(i).text();
-            lines.put(key, value);
-        }
-        return lines;
-    }
+    //Получение всех линий и станций в одну мапу
+    public LinkedHashMap<String, String> getAllLinesAndStations() throws IOException {
+        LinkedHashMap<String, String> linesAndStations = new LinkedHashMap<>();
+        Elements lines = getDocumentFromFile().select(".js-metro-line");
+        Elements stations = getDocumentFromFile().select(".js-metro-stations");
+        for (int i = 0; i < lines.size(); i++) {
+            String key = lines.get(i).text();
+            String value = stations.get(i).text().replaceAll("[0-9]+", "");
+           String valueCut =  value.replace(" .", ", ");
+           String valueCut1 =  valueCut.replace(".", "");
 
-    //Получение всех станций метро
-    private LinkedHashMap<String, LinkedHashSet<String>> getAllStations() throws IOException {
-        Elements elements = getDocumentFromFile().select(".js-metro-stations");
-        LinkedHashMap<String, LinkedHashSet<String>> stations = new LinkedHashMap<>();
-        LinkedHashSet<String> group = new LinkedHashSet<>();
-        for (int i = 0; i < elements.size(); i++) {
-            String key = elements.get(i).attr("data-line");
-            String value = elements.get(i).text().replaceAll("[0-9]+\\.", "");
-            String value1 = value.replaceAll("\\h", " ");
-            group.add(value1);
-            stations.put(key, group);
+            linesAndStations.put(key, valueCut1);
         }
-        return stations;
+        return linesAndStations;
     }
 
     //создание JSON файла и сохранение его в папку
-    private void createJsonFile() {
+    public void createJsonFile() {
         JSONObject object = new JSONObject();
-        object.put("connections", "???");
-        object.put("stations", stations);
+        JSONArray lines = new JSONArray();
+        JSONArray stations = new JSONArray();
+        for (String key : linesAndStations.keySet()) {
+            lines.add(key);
+        }
+        for (String value : linesAndStations.values()) {
+            stations.add(value.replaceAll("\u00a0", ""));
+        }
         object.put("lines", lines);
+        object.put("stations", stations);
 
-        try (
-                FileWriter writer = new FileWriter(FILENAME)) {
-            writer.write(object.toJSONString());
+
+        try (FileWriter writer = new FileWriter(FILENAME)) {
+            writer.write(object.toString());
             writer.flush();
         } catch (IOException ex) {
             ex.printStackTrace();

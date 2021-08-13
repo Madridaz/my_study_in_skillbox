@@ -1,0 +1,40 @@
+    //    List<String> lines = getAllLines();
+//    LinkedHashMap<String, List<String>> stations = getAllStations();
+
+
+    //    //Получение кода страницы сайта метрополитена
+//    public Document getDocumentFromWeb() throws IOException {
+//        Document doc = Jsoup.connect(WEB_SITE).maxBodySize(0).get();
+//        return doc;
+//    }
+
+
+//    //Получение всех линий метро
+//    private List<String> getAllLines() throws IOException {
+//        Elements elements = getDocumentFromFile().select(".js-metro-line");
+//        List<String> lines = new ArrayList<>();
+//        for (int i = 0; i < elements.size(); i++) {
+//           // String key = elements.get(i).attr("data-line");
+//            String value = elements.get(i).text();
+//            lines.add(value);
+//        }
+//        return lines;
+//    }
+
+
+//    //Получение всех станций метро
+//    private LinkedHashMap<String, List<String>> getAllStations() throws IOException {
+//        Elements elements = getDocumentFromFile().select(".js-metro-stations");
+//        LinkedHashMap<String, List<String>> stations = new LinkedHashMap<>();
+//        List<String> group = new ArrayList<>();
+//        for (int i = 0; i < elements.size(); i++) {
+//            String key = elements.get(i).attr("data-line");
+//            String value = elements.get(i).text().replaceAll("[0-9]+\\.", "");
+//           // String value1 = value.replaceAll("&nbsp;", "");
+//            group.add(value);
+//            stations.put(key, group);
+//        }
+//        return stations;
+//    }
+
+
