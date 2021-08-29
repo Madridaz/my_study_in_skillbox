@@ -9,12 +9,15 @@ public class Main {
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM PurchaseList");
+            ResultSet resultSet = statement.executeQuery("select name, \n" +
+                    " round (count(month(subscription_date))/(timestampdiff(month, min(subscription_date), max(subscription_date)))-0.1, 3) as среднее_количество_продаж \n" +
+                    "from courses \n" +
+                    "join subscriptions on courses.id = subscriptions.course_id group by name;");
             while (resultSet.next()) {
-                String course_name = resultSet.getString("course_name");
-                Date date = resultSet.getDate("subscription_date");
+                String course_name = resultSet.getString("name");
+                double count = resultSet.getDouble("среднее_количество_продаж");
 
-                System.out.println(course_name + ", " + " " + date);
+                System.out.println("Название курса: " + course_name + ". " + "Среднее количество продаж - " + count);
             }
             resultSet.close();
             statement.close();
@@ -25,3 +28,4 @@ public class Main {
         }
     }
 }
+//   select name, count(month(subscription_date))/(timestampdiff(month, min(subscription_date), max(subscription_date))) as avg_month from courses join subscriptions on courses.id = subscriptions.course_id;
