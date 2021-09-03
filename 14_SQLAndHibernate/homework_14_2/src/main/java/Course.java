@@ -4,42 +4,31 @@ import java.util.List;
 @Entity
 @Table(name = "Courses")
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
+    private Integer id;
     private String name;
-
-    private int duration;
-
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum")
+    private Integer duration;
     private CourseType type;
-
     private String description;
-    @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
+    private Integer studentsCount;
+    private Integer price;
+    private Float pricePerHour;
+    private List<Student> students;
 
-    @Column(name = "students_count", nullable = true)
-    private int studentsCount;
-
-    private int price;
-
-    @Column(name = "price_per_hour")
-    private float pricePerHour;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "Subscriptions",
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
-    private List<Student> students;
 
-    public int getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,14 +40,16 @@ public class Course {
         this.name = name;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "enum")
     public CourseType getType() {
         return type;
     }
@@ -75,6 +66,7 @@ public class Course {
         this.description = description;
     }
 
+    @ManyToOne
     public Teacher getTeacher() {
         return teacher;
     }
@@ -83,15 +75,16 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public int getStudentsCount() {
+    @Column(name = "students_count", nullable = true)
+    public Integer getStudentsCount() {
         return studentsCount;
     }
 
-    public void setStudentsCount(int studentsCount) {
+    public void setStudentsCount(Integer studentsCount) {
         this.studentsCount = studentsCount;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
@@ -99,7 +92,8 @@ public class Course {
         this.price = price;
     }
 
-    public float getPricePerHour() {
+    @Column(name = "price_per_hour")
+    public Float getPricePerHour() {
         return pricePerHour;
     }
 

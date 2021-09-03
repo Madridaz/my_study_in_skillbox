@@ -5,35 +5,25 @@ import java.io.Serializable;
 @Embeddable
 public class Key implements Serializable {
 
+    private Integer studentId;
+
+    private Integer courseId;
+
     @Column(name = "student_id")
-    private int studentId;
-
-    @Column(name = "course_id")
-    private int courseId;
-
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
 
-    public int getCourseId() {
+    @Column(name = "course_id")
+    public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 }

@@ -1,4 +1,5 @@
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -7,6 +8,10 @@ import java.util.Date;
 @Table(name = "Purchaselist")
 public class Purchaselist {
 
+    @EmbeddedId
+    private KeyForPurchaselist id;
+
+    @Column(name = "student_name")
     public String getStudentName() {
         return studentName;
     }
@@ -15,6 +20,7 @@ public class Purchaselist {
         this.studentName = studentName;
     }
 
+    @Column(name = "course_name")
     public String getCourseName() {
         return courseName;
     }
@@ -39,13 +45,11 @@ public class Purchaselist {
         this.subscriptionDate = subscriptionDate;
     }
 
-    @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "course_name")
     private String courseName;
 
-    private int price;
+    private Integer price;
 
     @Column(name = "subscription_date")
     private Date subscriptionDate;

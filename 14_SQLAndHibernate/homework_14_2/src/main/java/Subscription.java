@@ -11,26 +11,26 @@ public class Subscription {
     @EmbeddedId
     private Key id;
 
+    private Integer studentId;
+
+    private Integer courseId;
+
     @Column(name = "student_id", insertable = false, updatable = false)
-    private int studentId;
-
-    @Column(name = "course_id", insertable = false, updatable = false)
-    private int courseId;
-
     public int getStudent_id() {
-        return student_id;
+        return studentId;
     }
 
     public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+        this.studentId = studentId;
     }
 
+    @Column(name = "course_id", insertable = false, updatable = false)
     public int getCourse_id() {
-        return course_id;
+        return courseId;
     }
 
     public void setCourse_id(int course_id) {
-        this.course_id = course_id;
+        this.courseId = courseId;
     }
 
     public Date getSubscriptionDate() {

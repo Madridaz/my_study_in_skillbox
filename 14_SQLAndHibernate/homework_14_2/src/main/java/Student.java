@@ -5,11 +5,11 @@ import java.util.Date;
 @Table(name = "Students")
 public class Student {
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -21,14 +21,15 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
+    @Column(name = "registration_date")
     public Date getRegistrationDate() {
         return registrationDate;
     }
@@ -39,12 +40,11 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
-    private int age;
+    private Integer age;
 
-    @Column(name = "registration_date")
     private Date registrationDate;
 }
