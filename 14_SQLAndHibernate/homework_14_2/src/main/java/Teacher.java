@@ -1,10 +1,16 @@
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "Teachers")
 public class Teacher {
 
+    private Integer id;
+    private String name;
+    private Integer salary;
+    private Integer age;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -37,13 +43,5 @@ public class Teacher {
         this.age = age;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    private String name;
-
-    private Integer salary;
-
-    private Integer age;
 }

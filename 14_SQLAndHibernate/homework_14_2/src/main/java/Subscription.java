@@ -16,20 +16,20 @@ public class Subscription {
     private Integer courseId;
 
     @Column(name = "student_id", insertable = false, updatable = false)
-    public int getStudent_id() {
+    public Integer getStudent_id() {
         return studentId;
     }
 
-    public void setStudent_id(int student_id) {
+    public void setStudent_id(Integer student_id) {
         this.studentId = studentId;
     }
 
     @Column(name = "course_id", insertable = false, updatable = false)
-    public int getCourse_id() {
+    public Integer getCourse_id() {
         return courseId;
     }
 
-    public void setCourse_id(int course_id) {
+    public void setCourse_id(Integer course_id) {
         this.courseId = courseId;
     }
 

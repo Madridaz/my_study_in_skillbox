@@ -5,6 +5,13 @@ import java.util.Date;
 @Table(name = "Students")
 public class Student {
 
+    private Integer id;
+    private String name;
+    private Integer age;
+    private Date registrationDate;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -38,13 +45,5 @@ public class Student {
         this.registrationDate = registrationDate;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    private String name;
-
-    private Integer age;
-
-    private Date registrationDate;
 }
