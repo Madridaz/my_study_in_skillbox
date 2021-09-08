@@ -4,26 +4,24 @@ import java.io.Serializable;
 
 @Embeddable
 public class KeyForPurchaselist implements Serializable {
-
     @Column(name = "student_name")
     private String studentName;
-
     @Column(name = "course_name")
     private String courseName;
 
-    public String getStudentName() {
+    public String getstudentName() {
         return studentName;
     }
 
-    public void setStudentName(String studentName) {
+    public void setstudentName(String studentName) {
         this.studentName = studentName;
     }
 
-    public String getCourseName() {
+    public String getcourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setcourseName(String courseName) {
         this.courseName = courseName;
     }
 

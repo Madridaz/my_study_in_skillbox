@@ -4,7 +4,6 @@ import java.util.Date;
 @Entity
 @Table(name = "Students")
 public class Student {
-
     private Integer id;
     private String name;
     private Integer age;

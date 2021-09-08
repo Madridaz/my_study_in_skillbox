@@ -3,7 +3,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Teachers")
 public class Teacher {
-
     private Integer id;
     private String name;
     private Integer salary;

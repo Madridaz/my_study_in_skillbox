@@ -7,9 +7,13 @@ import java.util.Date;
 @Entity
 @Table(name = "Purchaselist")
 public class Purchaselist {
-
     @EmbeddedId
     private KeyForPurchaselist id;
+    private String studentName;
+    private String courseName;
+    private Integer price;
+    @Column(name = "subscription_date")
+    private Date subscriptionDate;
 
     @Column(name = "student_name")
     public String getStudentName() {
@@ -45,12 +49,5 @@ public class Purchaselist {
         this.subscriptionDate = subscriptionDate;
     }
 
-    private String studentName;
 
-    private String courseName;
-
-    private Integer price;
-
-    @Column(name = "subscription_date")
-    private Date subscriptionDate;
 }

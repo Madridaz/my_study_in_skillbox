@@ -4,7 +4,6 @@ import java.util.List;
 @Entity
 @Table(name = "Courses")
 public class Course {
-
     private Integer id;
     private String name;
     private Integer duration;

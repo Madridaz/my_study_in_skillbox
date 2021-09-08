@@ -1,3 +1,4 @@
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -5,9 +6,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LinkedPurchaseList")
 public class LinkedPurchaseList {
-
     @EmbeddedId
     private KeyForPurchaselist id;
+    @Column(name = "student_name", insertable = false, updatable = false)
+    private Integer student_id;
+    @Column(name = "course_name", insertable = false, updatable = false)
+    private Integer course_id;
 
     public Integer getStudent_id() {
         return student_id;
@@ -24,18 +28,4 @@ public class LinkedPurchaseList {
     public void setCourse_id(Integer course_id) {
         this.course_id = course_id;
     }
-
-    private Integer student_id;
-    private Integer course_id;
-
-
 }
-
-
-//create table LinkedPurchaseList (
-//        id INT NOT NULL auto_increment,
-//        first_name VARCHAR(20) default NULL,
-//        last_name  VARCHAR(20) default NULL,
-//        salary     INT  default NULL,
-//        PRIMARY KEY (id)
-//        );

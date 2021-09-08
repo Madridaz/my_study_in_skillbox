@@ -7,13 +7,11 @@ import java.util.Date;
 @Entity
 @Table(name = "Subscriptions")
 public class Subscription {
-
     @EmbeddedId
     private Key id;
-
     private Integer studentId;
-
     private Integer courseId;
+    private Date subscriptionDate;
 
     @Column(name = "student_id", insertable = false, updatable = false)
     public Integer getStudent_id() {
@@ -33,6 +31,7 @@ public class Subscription {
         this.courseId = courseId;
     }
 
+    @Column(name = "subscription_date")
     public Date getSubscriptionDate() {
         return subscriptionDate;
     }
@@ -41,6 +40,5 @@ public class Subscription {
         this.subscriptionDate = subscriptionDate;
     }
 
-    @Column(name = "subscription_date")
-    private Date subscriptionDate;
+
 }

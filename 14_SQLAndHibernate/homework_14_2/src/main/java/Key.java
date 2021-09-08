@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 @Embeddable
 public class Key implements Serializable {
-
     private Integer studentId;
-
     private Integer courseId;
 
     @Column(name = "student_id")
