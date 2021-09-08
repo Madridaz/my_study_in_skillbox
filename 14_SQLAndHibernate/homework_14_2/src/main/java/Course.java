@@ -13,12 +13,12 @@ public class Course {
     private Integer studentsCount;
     private Integer price;
     private Float pricePerHour;
+    private List<Student> students;
 
     @ManyToMany
     @JoinTable(name = "Subscriptions",
             joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-    )
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
     public List<Student> getStudents() {
         return students;
     }
@@ -26,8 +26,6 @@ public class Course {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
-
-    private List<Student> students;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +71,7 @@ public class Course {
         this.description = description;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     public Teacher getTeacher() {
         return teacher;
     }

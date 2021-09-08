@@ -7,6 +7,14 @@ import java.util.Date;
 @Entity
 @Table(name = "Subscriptions")
 public class Subscription {
+    public Key getId() {
+        return id;
+    }
+
+    public void setId(Key id) {
+        this.id = id;
+    }
+
     @EmbeddedId
     private Key id;
     private Integer studentId;

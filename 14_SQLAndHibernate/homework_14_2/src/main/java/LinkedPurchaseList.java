@@ -2,30 +2,72 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "LinkedPurchaseList")
 public class LinkedPurchaseList {
     @EmbeddedId
-    private KeyForPurchaselist id;
-    @Column(name = "student_name", insertable = false, updatable = false)
-    private Integer student_id;
-    @Column(name = "course_name", insertable = false, updatable = false)
-    private Integer course_id;
+    private Key id;
+    private Integer studentId;
+    private Integer courseId;
+    private String studentName;
+    private String courseName;
+    private Integer price;
+    @Column(name = "subscription_date")
+    private Date subscriptionDate;
 
-    public Integer getStudent_id() {
-        return student_id;
+    @Column(name = "student_id")
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public Integer getCourse_id() {
-        return course_id;
+    @Column(name = "course_id")
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setCourse_id(Integer course_id) {
-        this.course_id = course_id;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
+
+    @Column(name = "student_name")
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    @Column(name = "course_name")
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public Date getSubscriptionDate() {
+        return subscriptionDate;
+    }
+
+    public void setSubscriptionDate(Date subscriptionDate) {
+        this.subscriptionDate = subscriptionDate;
+    }
+
+
 }
