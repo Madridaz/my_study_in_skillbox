@@ -2,27 +2,32 @@ import java.io.File;
 
 public class Main {
     private static int newWidth = 300;
+    private static int processors = Runtime.getRuntime().availableProcessors();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String srcFolder = "C:\\Users\\home\\Desktop\\src";
         String dstFolder = "C:\\Users\\home\\Desktop\\dst";
 
         File srcDir = new File(srcFolder);
+        File[] files = srcDir.listFiles();
 
         long start = System.currentTimeMillis();
 
-        //Intel(R) Pentium(R) CPU 4405U @ 2.10GHz содержит 2 ядра
-        File[] files = srcDir.listFiles();
-        int middle = files.length / 2;
+        System.out.println("Количество потоков у процессора - " + processors);
+        Thread.sleep(2000);
 
-        File[] coreOne = new File[middle];
-        System.arraycopy(files, 0, coreOne, 0, coreOne.length);
-        ImageCutter imageCutterCoreOne = new ImageCutter(coreOne, newWidth, dstFolder, start);
-        imageCutterCoreOne.start();
+        System.out.println("Число активных потоков из данного потока (до запуска процедуры обрезки изображений): "
+                + Thread.activeCount());
+        Thread.sleep(2000);
 
-        File[] coreTwo = new File[files.length - middle];
-        System.arraycopy(files, middle, coreTwo, 0, coreTwo.length);
-        ImageCutter imageCutterCoreTwo = new ImageCutter(coreTwo, newWidth, dstFolder, start);
-        imageCutterCoreTwo.start();
+        for (int i = 0; i < processors; i++) {
+            ImageCutter imageCutter = new ImageCutter(files, newWidth, dstFolder, start);
+            imageCutter.start();
+
+        }
+
+        System.out.println("Число активных потоков из данного потока (после запуска процесса обрезки изображений): "
+                + Thread.activeCount());
+        Thread.sleep(2000);
     }
 }

@@ -36,8 +36,7 @@ public class ImageCutter extends Thread {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        System.out.println("Image.getScaledInstance() used");
-        System.out.println("Cutting finished after: " + (System.currentTimeMillis() - start) + " ms.");
+        System.out.println("Процесс обрезки завершен через: " + (System.currentTimeMillis() - start) + " мс.");
 
 
     }
