@@ -4,8 +4,10 @@ import java.util.Random;
 
 public class Bank {
     private Map<String, Account> accounts = new LinkedHashMap<>();
-    private Map<String, Account> blockedAccounts = new LinkedHashMap<>();
     private final Random random = new Random();
+    private static final String YES = "Служба Безопасности одобрила перевод";
+    private static final String NO = "Служба Безопасности отклонила перевод";
+    private static final String CHECK = "Подождите, пожалуйста, операция проверяется Службой Безопасности банка";
 
     public Bank() {
         createAccounts();
@@ -33,29 +35,26 @@ public class Bank {
         return random.nextBoolean();
     }
 
-    /**
-     * TODO: реализовать метод. Метод переводит деньги между счетами. Если сумма транзакции > 50000,
-     * то после совершения транзакции, она отправляется на проверку Службе Безопасности – вызывается
-     * метод isFraud. Если возвращается true, то делается блокировка счетов (как – на ваше
-     * усмотрение)
-     */
     public void transfer(String fromAccountNum, String toAccountNum, long amount) throws InterruptedException {
         Account from = accounts.get(fromAccountNum);
         Account to = accounts.get(toAccountNum);
+        String info = "Транзакция прошла успешно! " + "Аккаунт №" + from.getAccNumber() + " перевел " + "Аккаунту №" + to.getAccNumber() + " " + amount + " рублей.";
 
         if (amount < 50000) {
             from.setMoney(from.getMoney() - amount);
             to.setMoney(to.getMoney() + amount);
+            System.out.println(info);
         } else if (amount >= 50000) {
-            System.out.println("Подождите, пожалуйста, операция проверяется Службой Безопасности банка" + "\n");
+            System.out.println(CHECK);
             Thread.sleep(4000);
             boolean confirm = isFraud(from.getAccNumber(), to.getAccNumber(), amount);
             if (confirm == true) {
                 from.setMoney(from.getMoney() - amount);
                 to.setMoney(to.getMoney() + amount);
-                System.out.println("Служба Безопасности одобрила перевод" + "\n");
+                System.out.println(YES);
+                System.out.println(info);
             } else
-                System.out.println("Служба Безопасности отклонила перевод");
+                System.out.println(NO);
 
         }
     }
