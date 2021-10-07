@@ -9,7 +9,8 @@ public class DefaultController {
 
   @RequestMapping("/")
   public String index() {
-    return (new Date()).toString();
+    double i = Math.random();
+    return (new Date()).toString() + "; " + "случайное число " + i;
   }
 
 
