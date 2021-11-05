@@ -20,6 +20,7 @@ public class Acquaintance {
       System.out.println(tuple.getElement());
       if ((int) tuple.getScore() == randomUser(20)) {
         System.out.println(tuple.getElement() + " оплатил услугу");
+        Thread.sleep(1000);
         break;
       }
       Thread.sleep(300);
