@@ -1,41 +1,47 @@
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import java.util.Iterator;
-import java.util.function.Consumer;
-import org.bson.BsonDocument;
-import org.bson.Document;
+import com.mongodb.ServerAddress;
 
 public class Main {
 
   public static void main(String[] args) {
-    MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
-    MongoDatabase database = mongoClient.getDatabase("local");
-
-    // Создаем коллекцию
-    MongoCollection<Document> collection = database.getCollection("books");
+    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+    DB db = mongoClient.getDB("local");
     Books books = new Books();
 
-    //очистка коллекции от старых документов
+    // Создаем коллекцию, заполняем документами
+    DBCollection collection = db.getCollection("books");
     collection.drop();
+    collection.insert(books.addBooks());
 
-    // Вставляем документы в коллекцию
-    collection.insertOne(books.doc1);
-    collection.insertOne(books.doc2);
-    collection.insertOne(books.doc3);
-    collection.insertOne(books.doc4);
-    collection.insertOne(books.doc5);
+    //Сортировка и поиск самой старой книги
+    DBCursor oldBook = collection
+        .find()
+        .sort(new BasicDBObject("Year", 1)).limit(1);
+    System.out.println("Выборка самой старой книги");
 
-    //вывод коллекции на экран
-    System.out.println("Содержимое коллекции: ");
-    collection.find().forEach((Consumer<Document>) document -> {
-      System.out.println(document);
-    });
+    while (oldBook.hasNext()) {
+      DBObject obj1 = oldBook.next();
+      System.out.println("Название: " + obj1.get("Title") + "\n" +
+          "Автор: " + obj1.get("Author") + "\n" +
+          "Год: " + obj1.get("Year") + "\n");
 
-    collection.drop();
+      //Поиск всех книг одного автора
+      DBCursor sameAuthor = collection
+          .find(new BasicDBObject("Author", "Агата Кристи"))
+          .sort(new BasicDBObject("Year", 1));
+      System.out.println("Выборка всех книг одного автора");
 
-
+      while (sameAuthor.hasNext()) {
+        DBObject obj2 = sameAuthor.next();
+        System.out.println("Название: " + obj2.get("Title") + "\n" +
+            "Автор: " + obj2.get("Author") + "\n" +
+            "Год: " + obj2.get("Year"));
+      }
+    }
   }
-
 }
