@@ -6,12 +6,12 @@ public class Main {
       "добавление магазина - (Пример: добавить магазин Гиппо)" + "\n" +
       "добавление товара - (Пример: добавить пиво 100)" + "\n" +
       "добавление товара в магазин - (Пример: выставить товар пиво Гиппо)" + "\n" +
-      "вывод статистики по магазинам - (Пример: статистика товаров)" + "\n";
+      "вывод статистики по магазинам - (Пример: статистика)" + "\n";
 
   private static final String ADDMARKET = "(добавить магазин)\\s([А-Яа-я0-9]+)";
   private static final String ADDPRODUCT = "(добавить)\\s([А-Яа-я0-9]+)\\s([0-9]+)";
   private static final String ADDPRODUCTTOMARKET = "(выставить товар)\\s([А-Яа-я0-9]+)\\s([А-Яа-я0-9]+)";
-  private static final String STATS = "(статистика товаров)";
+  private static final String STATS = "(статистика)";
 
 
   public static void main(String[] args) {

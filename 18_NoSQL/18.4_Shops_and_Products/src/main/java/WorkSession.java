@@ -3,21 +3,29 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
-import static com.mongodb.client.model.Aggregates.*;
+import org.bson.Document;
 
 public class WorkSession {
 
   DBCollection marketCollection;
   DBCollection productCollection;
   List<DBObject> products = new ArrayList<>();
+
+  public List<DBObject> getProducts(DBObject s) {
+    return products;
+  }
+
+  public void setProducts(List<DBObject> products) {
+    this.products = products;
+  }
 
   //запуск клиента, создание коллекций
   public WorkSession() {
@@ -58,6 +66,42 @@ public class WorkSession {
 
   //вывод статистики
   public void stats() {
+    MongoClient mongoClient = new MongoClient(
+        new MongoClientURI(
+            "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB+Compass&directConnection=true&ssl=false"));
+
+    MongoDatabase db = mongoClient.getDatabase("local");
+    MongoCollection<Document> col = db.getCollection("markets");
+    MongoDatabase db1 = mongoClient.getDatabase("local");
+    MongoCollection<Document> col1 = db.getCollection("products");
+
+    AggregateIterable<Document> res = col.aggregate(Arrays.asList(new Document("$unwind",
+            new Document("path", "$list")),
+        new Document("$group",
+            new Document("_id", "$name")
+                .append("Сумма всех товаров магазина: ",
+                    new Document("$sum", "$list.price"))
+                .append("Максимальная цена товара в магазине: ",
+                    new Document("$max", "$list.price"))
+                .append("Минимальная цена товара в магазине: ",
+                    new Document("$min", "$list.price"))
+                .append("Средняя цена товаров в магазине: ",
+                    new Document("$avg", "$list.price"))
+                .append("Цены всех товаров: ",
+                    new Document("$push", "$list.price")))));
+
+    for (Document d : res) {
+      System.out.println(d.toJson());
+    }
+
+    AggregateIterable<Document> res1 = col1.aggregate(Arrays.asList(new Document("$match",
+            new Document("price",
+                new Document("$lt", 100L))),
+        new Document("$count", "количество товаров дешевле 100 р")));
+
+    for (Document d : res1) {
+      System.out.println(d.toJson());
+    }
 
   }
 }
