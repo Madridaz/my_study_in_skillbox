@@ -20,7 +20,6 @@ public class MainForm {
   private JLabel surnameLabel;
   private JLabel patronymicLabel;
 
-
   public MainForm() {
     //скрыть текстовое поле и кнопку expand
     allText.setVisible(false);
