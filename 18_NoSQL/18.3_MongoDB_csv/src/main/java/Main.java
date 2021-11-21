@@ -26,6 +26,8 @@ public class Main {
     System.out.println("Количество студентов в базе: " + studentsCount + " человек.");
 
     //Получение количества студентов старше 40 лет
+//    int countOldStudents = collection.find(new BasicDBObject("Age", new BasicDBObject("$gt", 40))).count();
+//    System.out.println(countOldStudents);
     DBCursor oldStudents = collection.find().sort(new BasicDBObject("Age", -1));
     int countOld = 0;
     while (oldStudents.hasNext()) {

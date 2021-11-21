@@ -105,9 +105,10 @@ public class MainForm {
             @Override
             public void actionPerformed(ActionEvent e) {
               String[] input = allText.getText().split(" ");
-              if (input.length != 2) {
+              if (input.length != 3) {
                 JOptionPane.showMessageDialog(mainPanel, "Введены не все данные");
               } else {
+                //сокрытие полей формы 1, открытие формы 2
                 hideSecondForm();
               }
             }

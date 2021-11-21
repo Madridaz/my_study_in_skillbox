@@ -4,6 +4,7 @@ import com.mongodb.DBObject;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CsvParse {
@@ -17,9 +18,9 @@ public class CsvParse {
 
     CSVReader reader = new CSVReader(new FileReader(FILE), ',', '"', 1);
     allRows = reader.readAll();
-//    for (String[] row : allRows) {
-//      System.out.println(Arrays.toString(row));
-//    }
+    for (String[] row : allRows) {
+      System.out.println(Arrays.toString(row));
+    }
     return allRows;
   }
 
